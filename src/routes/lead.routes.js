@@ -6,11 +6,15 @@ const {
   getLeads,
   updateLeadAddress,
   deleteLead,
-  updateLeadStatus
+  updateLeadStatus,
+  getConnectedCalls
 } = require('../controllers/lead.controller');
 
 // All routes require authentication
 router.use(auth);
+
+// Get connected calls (admin only)
+router.get('/connected', checkRole(['admin']), getConnectedCalls);
 
 // Create new lead (telecaller only)
 router.post('/', checkRole(['telecaller']), createLead);
@@ -19,12 +23,12 @@ router.post('/', checkRole(['telecaller']), createLead);
 router.get('/', getLeads);
 
 // Update lead address (telecaller only)
-router.patch('/:id/address', checkRole(['telecaller']), updateLeadAddress);
+router.patch('/address/:id', checkRole(['telecaller']), updateLeadAddress);
 
 // Delete lead (telecaller only)
 router.delete('/:id', checkRole(['telecaller']), deleteLead);
 
 // Update lead status (telecaller only)
-router.patch('/:id/status', checkRole(['telecaller']), updateLeadStatus);
+router.patch('/status/:id', checkRole(['telecaller']), updateLeadStatus);
 
 module.exports = router; 

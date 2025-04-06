@@ -73,7 +73,7 @@ const deleteLead = async (req, res) => {
 // Update lead status
 const updateLeadStatus = async (req, res) => {
   try {
-    const { status, callResponse } = req.body;
+    const { status, callResponse, address } = req.body;
     const lead = await Lead.findOne({
       _id: req.params.id,
       assignedTo: req.user._id
@@ -85,6 +85,12 @@ const updateLeadStatus = async (req, res) => {
 
     lead.status = status;
     lead.callResponse = callResponse;
+    
+    // Update address if provided
+    if (address) {
+      lead.address = address;
+    }
+    
     lead.lastCallDate = Date.now();
     await lead.save();
 
@@ -94,10 +100,27 @@ const updateLeadStatus = async (req, res) => {
   }
 };
 
+// Get connected calls
+const getConnectedCalls = async (req, res) => {
+  try {
+    const connectedCalls = await Lead.find({
+      status: 'connected',
+      lastCallDate: { $ne: null }
+    })
+    .populate('assignedTo', 'name email')
+    .sort({ lastCallDate: -1 }); // Sort by most recent calls first
+
+    res.json(connectedCalls);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching connected calls', error: error.message });
+  }
+};
+
 module.exports = {
   createLead,
   getLeads,
   updateLeadAddress,
   deleteLead,
-  updateLeadStatus
+  updateLeadStatus,
+  getConnectedCalls
 }; 

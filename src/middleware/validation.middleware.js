@@ -44,10 +44,10 @@ const leadValidationRules = {
   ],
   updateStatus: [
     check('status')
-      .isIn(['connected', 'not_connected', 'pending'])
+      .isIn(['connected', 'not_connected'])
       .withMessage('Invalid status'),
     check('callResponse')
-      .isIn(['discussed', 'callback', 'interested', 'busy', 'rnr', 'switched_off', null])
+      .isIn(['discussed', 'callback', 'interested', 'busy', 'RNR', 'switched_off', null])
       .withMessage('Invalid call response'),
     validate
   ]

@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Log the MongoDB URI being used (without sensitive info)
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/crm-app';
+const mongoUri = process.env.MONGODB_URI;
 console.log('Attempting to connect to MongoDB at:', mongoUri.replace(/\/\/[^@]*@/, '//****:****@'));
 
 // MongoDB Connection with enhanced options
