@@ -35,7 +35,7 @@ This is the backend for the Customer Relationship Management (CRM) application. 
 4. Create a `.env` file in the root directory with the following variables:
    ```
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/crm-app
+   MONGODB_URI=MONGODB_URI=mongodb+srv://sourabhpatil0369:Password@crm.wwkftik.mongodb.net/?retryWrites=true&w=majority&appName=crm
    JWT_SECRET=sourabh-jwt-key
    NODE_ENV=development
    LOG_LEVEL=info
