@@ -36,7 +36,7 @@ This is the backend for the Customer Relationship Management (CRM) application. 
    ```
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/crm-app
-   JWT_SECRET=your-super-secret-key-change-this-in-production
+   JWT_SECRET=sourabh-jwt-key
    NODE_ENV=development
    LOG_LEVEL=info
    ```
